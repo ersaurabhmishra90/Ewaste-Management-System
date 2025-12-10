@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Waste Management System | Home</title>
+    <style>
+        /* RESET */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        /* BACKGROUND */
+        
+        body {
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            background-attachment: fixed;
+            color: #2c3e50;
+            overflow-y: auto;
+            padding: 40px 0;
+        }
+        /* NAVBAR */
+        
+        nav {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 1s ease;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #27ae60;
+            object-fit: cover;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #1e3d34;
+            font-weight: 500;
+            margin-left: 18px;
+            transition: 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #27ae60;
+        }
+        
+        .login-btn {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.4);
+        }
+        /* SECTIONS */
+        
+        section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(15px);
+            animation: fadeIn 1s ease;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e3d34;
+            font-size: 26px;
+            border-bottom: 2px solid #27ae60;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        
+        p {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        /* HERO */
+        
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero-left h3 {
+            font-size: 24px;
+            color: #1e3d34;
+            margin-bottom: 15px;
+        }
+        
+        .hero-left .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .feature {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+        /* SERVICES */
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .service {
+            padding: 20px;
+            border-radius: 15px;
+            background: #f8f8f8;
+            transition: 0.3s;
+        }
+        
+        .service:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(46, 204, 113, 0.2);
+        }
+        
+        .service h3 {
+            color: #1e3d34;
+            margin-bottom: 10px;
+        }
+        /* STATS */
+        
+        .stats {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .stat {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            background: #ecf0f1;
+            text-align: center;
+        }
+        
+        .stat .num {
+            font-size: 22px;
+            font-weight: 700;
+            color: #27ae60;
+        }
+        /* CTA */
+        
+        .cta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .cta a {
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .cta .primary {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            color: #fff;
+        }
+        
+        .cta .outline {
+            border: 2px solid #27ae60;
+            color: #27ae60;
+        }
+        
+        .cta .primary:hover {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #2c3e50;
+            font-size: 13px;
+        }
+        /* FLOATING CIRCLES */
+        
+        .circle {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .circle.one {
+            width: 150px;
+            height: 150px;
+            top: 40px;
+            right: 60px;
+        }
+        
+        .circle.two {
+            width: 250px;
+            height: 250px;
+            bottom: 60px;
+            left: 50px;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media(max-width:768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+
+    <nav>
+        <div class="logo">
+            <img src="/static/img/logo.png" alt="Logo">
+            <span>E-Waste Management</span>
+        </div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#partners">Partners</a>
+            <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-left">
+            <h3>Make Electronic Waste Matter — Responsibly</h3>
+            <p>Collect, certify and track e-waste from pickup to recycling. Reduce landfill, recover materials and get digital certificates for compliance.</p>
+            <div class="features">
+                <div class="feature">Free Pickup Scheduling</div>
+                <div class="feature">Track Shipments</div>
+                <div class="feature">Certificate of Recycling</div>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="num">12,482</div>
+                    <div>Devices Processed</div>
+                </div>
+                <div class="stat">
+                    <div class="num">8.7T</div>
+                    <div>Materials Recovered</div>
+                </div>
+                <div class="stat">
+                    <div class="num">1,052</div>
+                    <div>Certified Pickups</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="grid-3">
+            <div class="service">
+                <h3>Collection & Pickup</h3>
+                <p>Doorstep pickup, consolidated drop-off and reverse logistics for bulk collections.</p>
+            </div>
+            <div class="service">
+                <h3>Processing & Recycling</h3>
+                <p>Component-level dismantling, secure data erasure and responsible material recovery.</p>
+            </div>
+            <div class="service">
+                <h3>Certification & Reporting</h3>
+                <p>Digital certificates and compliance reports for corporate and regulatory audits.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners">
+        <h2>Partners & Certifications</h2>
+        <div class="grid-3">
+            <div class="service">
+                <h3>Govt. Agency</h3>
+                <p>Collaborating with government programs for e-waste reduction.</p>
+            </div>
+            <div class="service">
+                <h3>Certified Recycler</h3>
+                <p>Partnered with certified recycling centers ensuring safe material recovery.</p>
+            </div>
+            <div class="service">
+                <h3>Corporate CSR</h3>
+                <p>Enabling organizations to meet sustainability goals responsibly.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div>
+            <strong>Ready to Recycle?</strong>
+            <div>Schedule a free pickup today and be part of a cleaner planet.</div>
+        </div>
+        <div>
+            <a href="#pickup" class="primary">Schedule Pickup</a>
+            <a href="#contact" class="outline">Contact Us</a>
+        </div>
+    </section>
+
+    <footer>© <span id="year"></span> E-Waste Management System — All Rights Reserved</footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

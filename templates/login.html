@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Waste Management System | Login</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #649b90 0%, #24675a 100%);
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            max-width: 950px;
+            width: 95%;
+            padding: 50px;
+        }
+        .left { flex: 1; padding-right: 40px; }
+        .left h1 { color: #1a2062; font-size: 50px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
+        .left p { font-size: 17px; color: #444; line-height: 1.6; max-width: 400px; }
+        .right { flex: 1; max-width: 400px; background: #f9fbfc; border: 1px solid #e3e6ea; border-radius: 12px; padding: 35px 30px; text-align: center; }
+        .right input, .right select { width: 100%; padding: 14px 15px; margin-bottom: 14px; font-size: 15px; border: 1px solid #cdd3d8; border-radius: 8px; outline: none; }
+        .right input:focus, .right select:focus { border-color: #0a3d62; box-shadow: 0 0 5px rgba(10,61,98,0.2); }
+        .login-btn { width: 100%; background: linear-gradient(90deg,#0a3d62,#3c6382); color: #fff; border: none; padding: 14px; font-size: 17px; font-weight: 600; border-radius: 8px; cursor: pointer; }
+        .login-btn:hover { transform: scale(1.03); background: linear-gradient(90deg,#054470,#487a9a); }
+        .flash { color: red; margin-bottom: 10px; font-size: 14px; }
+        .footer-text { text-align: center; margin-top: 18px; font-size: 13px; color: #555; }
+        .footer-text a { color: #0a3d62; font-weight: 500; text-decoration: none; }
+        .footer-text a:hover { text-decoration: underline; }
+        .create-btn { background-color: #27ae60; color: white; padding: 12px 16px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; width: 100%; }
+        .create-btn:hover { background-color: #219150; }
+        @media (max-width: 900px) { .container { flex-direction: column; text-align: center; padding: 40px 25px; } .left { padding-right: 0; margin-bottom: 30px; } .left h1 { font-size: 38px; } }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>E-Waste</h1>
+            <p>
+                E-Waste Management System ensures responsible recycling of electronic waste through registered users, centers, agents, and administrators.
+            </p>
+        </div>
+
+        <div class="right">
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="flash">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <!-- IMPORTANT: action now uses 'login' -->
+            <form action="{{ url_for('login') }}" method="POST">
+                <input type="text" name="username" placeholder="Enter Email" required />
+                <input type="password" name="password" placeholder="Enter Password" required />
+                <!-- userType removed: backend detects role by email -->
+                <button type="submit" class="login-btn">Log in</button>
+            </form>
+
+            <!-- Normal user registration -->
+            <button onclick="window.location.href='{{ url_for('register_user') }}'" class="create-btn">
+                Create new user account
+            </button>
+
+            <div class="footer-text">
+                Create a page for your
+                <a href="{{ url_for('register_center') }}">center</a> or
+                <a href="{{ url_for('register_agent') }}">agent</a>.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

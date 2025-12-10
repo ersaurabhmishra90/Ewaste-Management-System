@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard | E-Waste</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0db37d, #0fb57b, #0fc279);
+            min-height: 100vh;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .circle {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle.one {
+            width: 150px;
+            height: 150px;
+            top: 40px;
+            right: 60px;
+        }
+
+        .circle.two {
+            width: 250px;
+            height: 250px;
+            bottom: 60px;
+            left: 50px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .header {
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, .96);
+            border-radius: 20px;
+            padding: 18px 26px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-left img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1c4532;
+        }
+
+        .header-sub {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .logout-btn {
+            background: #e63946;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+
+        .main {
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, .96);
+            border-radius: 20px;
+            padding: 28px 24px 30px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .15);
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: left;
+            color: #1c4532;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 200px;
+            background: #f8f8f8;
+            border-radius: 14px;
+            padding: 16px 18px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .07);
+        }
+
+        .card-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .card-num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #27ae60;
+        }
+
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .new-btn {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            color: #fff;
+            padding: 9px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f8f8f8;
+            box-shadow: 0 6px 18px rgba(46, 204, 113, 0.2);
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #27ae60;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        tr:nth-child(even) {
+            background: #f1f1f1;
+        }
+
+        .status {
+            padding: 4px 10px;
+            border-radius: 999px;
+            color: #fff;
+            font-size: 11px;
+        }
+
+        .st-pending {
+            background: #f9a825;
+        }
+
+        .st-assigned {
+            background: #0288d1;
+        }
+
+        .st-progress {
+            background: #7b1fa2;
+        }
+
+        .st-done {
+            background: #2e7d32;
+        }
+
+        .cert-link a {
+            font-size: 12px;
+            color: #1a4b82;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .cert-link a:hover {
+            text-decoration: underline;
+        }
+
+        .no-data {
+            padding: 12px;
+            color: #666;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+
+    <div class="header">
+        <div class="header-left">
+            <img src="https://img.icons8.com/color/96/recycle.png" alt="logo">
+            <div>
+                <div class="header-title">E-Waste User Dashboard</div>
+                <div class="header-sub">Logged in as {{ name }}</div>
+            </div>
+        </div>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+
+    <div class="main">
+        <h1>Your Pickup Requests</h1>
+        <div class="subtitle">
+            Track all your e-waste pickup requests, their status and certificates once recycling is completed.
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-title">Total Pickups</div>
+                <div class="card-num">{{ total_pickups }}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Pending / Assigned</div>
+                <div class="card-num">{{ pending_count }}</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Completed</div>
+                <div class="card-num">{{ completed_count }}</div>
+            </div>
+        </div>
+
+        <div class="top-actions">
+            <div style="font-size:14px;color:#555;">
+                Latest requests shown first.
+            </div>
+            <a class="new-btn" href="{{ url_for('user_new_pickup') }}">+ New Pickup Request</a>
+        </div>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>E-Waste Type</th>
+                <th>Address</th>
+                <th>Agent</th>
+                <th>Status</th>
+                <th>Certificate</th>
+            </tr>
+
+            {% if pickups %}
+            {% for p in pickups %}
+            <tr>
+                <td>#{{ p.id }}</td>
+                <td>{{ p.ewaste_type or 'General' }}</td>
+                <td>{{ p.address }}</td>
+                <td>{{ p.agent_name or 'Not assigned yet' }}</td>
+                <td>
+                    {% set cls = 'st-pending' %}
+                    {% if p.status == 'assigned' %}
+                    {% set cls = 'st-assigned' %}
+                    {% elif p.status == 'in_progress' %}
+                    {% set cls = 'st-progress' %}
+                    {% elif p.status in ['completed','recycled'] %}
+                    {% set cls = 'st-done' %}
+                    {% endif %}
+                    <span class="status {{ cls }}">{{ p.status|replace('_',' ')|capitalize }}</span>
+                </td>
+                <td class="cert-link">
+                    {% if p.certificate_path %}
+                    <a class="btn btn-sm btn-primary"
+                        href="{{ url_for('download_certificate', filename=p.certificate_path) }}">Handover</a>
+                    {% endif %}
+
+                    {% if p.certificate_pdf %}
+                    <a class="btn btn-sm btn-success"
+                        href="{{ url_for('download_certificate', filename=p.certificate_pdf) }}">Recycled</a>
+                    {% endif %}
+
+                    {% if not p.certificate_path and not p.certificate_pdf %}
+                    Not Ready
+                    {% endif %}
+
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="6" class="no-data">
+                    No pickup requests yet. Click "New Pickup Request" to create one.
+                </td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+</body>
+
+</html>

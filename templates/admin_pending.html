@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pending Approvals - E-Waste Admin</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
+    body {
+        background: linear-gradient(135deg,#1abc9c,#16a085);
+        min-height: 100vh;
+        padding: 40px 0;
+    }
+    nav {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+        background: rgba(255,255,255,0.95);
+        border-radius: 20px;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        margin-bottom: 30px;
+    }
+    .logo { display:flex; align-items:center; gap:10px; }
+    .logo img { width:50px; height:50px; border-radius:50%; }
+    .nav-links a {
+        margin-left:18px; text-decoration:none; color:#1e3d34; font-weight:500;
+    }
+    .logout-btn {
+        background:#e63946; color:#fff; padding:8px 18px; border-radius:30px;
+        text-decoration:none; font-weight:600;
+    }
+    .wrapper {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+        background: rgba(255,255,255,0.95);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+    }
+    h2 {
+        text-align:center; margin-bottom:25px;
+        color:#1e3d34; border-bottom:2px solid #27ae60;
+        display:inline-block; padding-bottom:6px;
+    }
+    h3 {
+        margin-top:20px; margin-bottom:10px; color:#1e3d34;
+    }
+    table {
+        width:100%; border-collapse:collapse; margin-bottom:25px;
+        font-size:14px;
+    }
+    th, td { padding:10px 12px; border-bottom:1px solid #ddd; }
+    th { background:#27ae60; color:#fff; text-align:left; }
+    tr:nth-child(even) { background:#f4f4f4; }
+    .approve-btn {
+        padding:6px 10px; border:none; border-radius:6px;
+        background:#27ae60; color:#fff; font-size:13px;
+        cursor:pointer; text-decoration:none;
+    }
+    .badge-empty {
+        padding:10px; color:#555; font-size:14px;
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/728/728093.png" alt="logo">
+        <span>E-Waste Admin</span>
+    </div>
+    <div class="nav-links">
+        <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin_requests') }}">Pickups</a>
+        <a href="{{ url_for('admin_pending') }}">Pending Approvals</a>
+    </div>
+    <a class="logout-btn" href="{{ url_for('logout') }}">Logout</a>
+</nav>
+
+<div class="wrapper">
+    <div style="text-align:center;">
+        <h2>Pending Approvals</h2>
+    </div>
+
+    <!-- Pending Centers -->
+    <h3>Centers Waiting for Approval</h3>
+    {% if pending_centers %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Center Name</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            {% for c in pending_centers %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td>{{ c.center_name }}</td>
+                <td>{{ c.address }}</td>
+                <td>
+                    <a class="approve-btn"
+                       href="{{ url_for('admin_approve_center', center_id=c.id) }}">
+                        Approve
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="badge-empty">No centers waiting for approval.</div>
+    {% endif %}
+
+    <!-- Pending Agents -->
+    <h3>Agents Waiting for Approval</h3>
+    {% if pending_agents %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Action</th>
+            </tr>
+            {% for a in pending_agents %}
+            <tr>
+                <td>{{ a.id }}</td>
+                <td>{{ a.fullname }}</td>
+                <td>{{ a.email }}</td>
+                <td>{{ a.mobile }}</td>
+                <td>
+                    <a class="approve-btn"
+                       href="{{ url_for('admin_approve_agent', agent_id=a.id) }}">
+                        Approve
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="badge-empty">No agents waiting for approval.</div>
+    {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Pickup Request | User</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+    body{
+        background:linear-gradient(135deg,#1abc9c,#16a085);
+        min-height:100vh;display:flex;justify-content:center;align-items:center;
+        padding:30px 10px;
+    }
+    .card{
+        width:95%;max-width:500px;background:#fffffff0;
+        border-radius:20px;padding:26px 24px 24px;
+        box-shadow:0 10px 35px rgba(0,0,0,.2);
+    }
+    h2{
+        text-align:center;color:#1e3d34;margin-bottom:6px;
+    }
+    .subtitle{text-align:center;font-size:13px;color:#666;margin-bottom:16px;}
+    label{
+        display:block;font-size:13px;font-weight:500;color:#145a4f;
+        margin-top:10px;margin-bottom:4px;
+    }
+    input,textarea,select{
+        width:100%;padding:10px 11px;border-radius:10px;
+        border:1.3px solid #cfd9df;background:#f8f9fa;
+        font-size:14px;outline:none;
+    }
+    textarea{min-height:70px;resize:vertical;}
+    input:focus,textarea:focus,select:focus{
+        border-color:#27ae60;box-shadow:0 0 4px rgba(39,174,96,.3);background:#fff;
+    }
+    button{
+        width:100%;margin-top:14px;padding:11px;border:none;
+        border-radius:10px;background:linear-gradient(90deg,#27ae60,#2ecc71);
+        color:#fff;font-size:16px;font-weight:600;cursor:pointer;
+    }
+    button:hover{filter:brightness(1.05);}
+    .back{
+        display:inline-block;margin-top:10px;font-size:13px;
+        text-decoration:none;color:#145a4f;font-weight:500;
+    }
+</style>
+</head>
+<body>
+<div class="card">
+    <h2>New Pickup Request</h2>
+    <div class="subtitle">Provide details about the e-waste you want to recycle.</div>
+
+    <form method="POST" action="{{ url_for('user_new_pickup') }}">
+        <label for="ewaste_type">E-Waste Type *</label>
+        <select id="ewaste_type" name="ewaste_type" required>
+            <option value="">-- Select --</option>
+            <option value="Mobile">Mobile Phone</option>
+            <option value="Laptop">Laptop</option>
+            <option value="Television">Television</option>
+            <option value="Printer">Printer</option>
+            <option value="Mixed">Mixed E-Waste</option>
+        </select>
+
+        <label for="address">Pickup Address *</label>
+        <textarea id="address" name="address" placeholder="Enter full pickup address" required></textarea>
+
+        <label for="notes">Additional Details</label>
+        <textarea id="notes" name="notes" placeholder="Approx. quantity, brand, any special note"></textarea>
+
+        <button type="submit">Submit Request</button>
+    </form>
+
+    <a class="back" href="{{ url_for('user_dashboard') }}">← Back to Dashboard</a>
+</div>
+</body>
+</html>
