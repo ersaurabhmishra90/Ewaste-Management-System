@@ -30,12 +30,22 @@ app.config["CERT_FOLDER"] = CERT_FOLDER
 # DB helper (mysql.connector)
 # ---------------------------
 def get_db_connection():
+    """
+    Returns a new mysql.connector connection.
+    Reads credentials from environment with sensible defaults for Railway.
+    """
+    host = os.getenv("DB_HOST", "switchyard.proxy.rlwy.net")
+    port = int(os.getenv("DB_PORT", os.getenv("PORT_MYSQL", 45401)))
+    user = os.getenv("DB_USER", "root")
+    password = os.getenv("DB_PASSWORD", "RxfayvnYNIYxOvZaIxHVkVMzeWdWakyo")
+    database = os.getenv("DB_NAME", os.getenv("DB_DATABASE", "railway"))
+
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="root",
-        database="database_ewaste"
-        # add auth_plugin="mysql_native_password" if your MySQL needs it
+        host=host,
+        port=port,
+        user=user,
+        password=password,
+        database=database
     )
 
 # ---------------------------
