@@ -1,4 +1,4 @@
-flask
+Flask
 mysql-connector-python
-Werkzeug
-jinja2
+reportlab
+gunicorn
